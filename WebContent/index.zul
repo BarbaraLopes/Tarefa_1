@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window title="CADASTRO" border="normal" width="400px" height="300px">
+Nome:<textbox constraint="no empty" cols="35" id="nome">
+<attribute name="onBlur">
+if(self.getValue().equals(""))
+{
+self.setValue(" ");
+throw new WrongValueException(self, "Nome Inválido");
+}
+</attribute>
+</textbox>
+<separator />
+Senha:<textbox constraint="no empty" cols="6" maxlength="6" id="senha" type="password" />*Máximo de 6 caracteres.
+<separator />
+CPF:<textbox cols="11" maxlength="11" id="cpf"> 
+<attribute name="onBlur">
+if(self.getValue().equals("11111111111") || self.getValue().equals("22222222222")
+	|| self.getValue().equals("33333333333") || self.getValue().equals("44444444444")
+	|| self.getValue().equals("55555555555") || self.getValue().equals("66666666666")
+	|| self.getValue().equals("77777777777") || self.getValue().equals("88888888888")
+	|| self.getValue().equals("99999999999"))
+{
+throw new WrongValueException(self, "CPF Inválido");
+}
+</attribute>
+</textbox> * Somente numeros
+<separator />
+Data de nascimento:<datebox format="dd/mm/yyyy" id="dtnascimento" />* 00/00/0000
+<separator />  
+<radiogroup id="sv1" onCheck="choice1.value = self.selectedItem.label" />
+Sexo:                          
+<radio id="ra1" label="Masculino" radiogroup="sv1" />               
+<radio id="ra2" label="Feminino" radiogroup="sv1" />    
+<separator />
+Estado Civil:
+<combobox>
+<comboitem label="Solteiro" />
+<comboitem label="Casado" />
+<comboitem label="Divorciado" />
+<comboitem label="Viúvo" />
+<comboitem label="Outros" />
+</combobox> 
+<separator /> 
+<div align="center">
+<button  id="botao" label="Enviar" onClick="clicar()" />
+</div>
+<zscript>
+void clicar()
+{
+alert("Enviado com sucesso!!!");
+}
+</zscript>               
+</window>
