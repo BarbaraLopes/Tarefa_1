@@ -1,16 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<window title="CADASTRO" border="normal" width="400px" height="300px">
-Nome:<textbox constraint="no empty" cols="35" id="nome">
+<div align="center">
+<window title="CADASTRO" border="normal" width="500px" height="300px">
+<tabbox height="200px">
+<tabs>
+<tab label="Dados de Identificação" id="id" />
+<tab label="Dados Pessoais" id="pes" />
+<tab label="Endereço" id="end" />
+</tabs>
+<tabpanels>
+<tabpanel height="150px">
+<div align="left">
+<separator />
+E-mail:<textbox constraint="no empty" cols="35" id="email">
 <attribute name="onBlur">
-if(self.getValue().equals(""))
+if(!self.getValue().contains("@") || !self.getValue().contains("."))
 {
 self.setValue(" ");
-throw new WrongValueException(self, "Nome Inválido");
+throw new WrongValueException(self, "E-mail Inválido. Ex.: fulano@xxxx.com");
 }
 </attribute>
 </textbox>
 <separator />
 Senha:<textbox constraint="no empty" cols="6" maxlength="6" id="senha" type="password" />*Máximo de 6 caracteres.
+<separator />
+Confirma senha:<textbox constraint="no empty" cols="6" maxlength="6" id="confSenha" type="password" />
+</div>
+<div align="center">
+<button id="b1" label="Próximo" onClick="proxAba()" />
+</div>
+<zscript src="codigo.zs" />
+</tabpanel>
+<tabpanel height="150px">
+<div align="left">
+<separator />
+Nome:<textbox constraint="no empty" cols="35" id="nome" />
 <separator />
 CPF:<textbox cols="11" maxlength="11" id="cpf"> 
 <attribute name="onBlur">
@@ -23,14 +46,15 @@ if(self.getValue().equals("11111111111") || self.getValue().equals("22222222222"
 throw new WrongValueException(self, "CPF Inválido");
 }
 </attribute>
-</textbox> * Somente numeros
+</textbox>
 <separator />
 Data de nascimento:<datebox format="dd/mm/yyyy" id="dtnascimento" />* 00/00/0000
 <separator />  
-<radiogroup id="sv1" onCheck="choice1.value = self.selectedItem.label" />
+<radiogroup id="s1">
 Sexo:                          
-<radio id="ra1" label="Masculino" radiogroup="sv1" />               
-<radio id="ra2" label="Feminino" radiogroup="sv1" />    
+<radio id="masc" label="Masculino" radiogroup="s1" checked="true"/>               
+<radio id="fem" label="Feminino" radiogroup="s1" />  
+</radiogroup>  
 <separator />
 Estado Civil:
 <combobox>
@@ -41,13 +65,38 @@ Estado Civil:
 <comboitem label="Outros" />
 </combobox> 
 <separator /> 
+</div>
+<div align="center">
+<button id="b2" label="Próximo" onClick="proxAba2()" />
+</div>
+<zscript src="codigo.zs" />
+</tabpanel>
+<tabpanel height="150px">
+<div align="left">
+<separator />
+Endereço:<textbox constraint="no empty" cols="40" maxlength="70" id="ende" />
+Número:<intbox constraint="no empty" cols="10" maxlength="10" id="num" />
+<separator />
+Complemento:<textbox constraint="no empty" cols="11" maxlength="50" id="comp" />
+<separator />
+Bairro:<textbox constraint="no empty" cols="20" id="bairro" />
+<separator />
+Cidade/Estado:<textbox constraint="no empty" cols="30" id="cid" />
+País:
+<combobox>
+<comboitem label="Brasil" />
+<comboitem label="Outros" />
+</combobox>
+<separator />
+CEP:<textbox constraint="no empty" cols="10" id="cep" />
+<separator />
+</div>
 <div align="center">
 <button  id="botao" label="Enviar" onClick="clicar()" />
 </div>
-<zscript>
-void clicar()
-{
-alert("Enviado com sucesso!!!");
-}
-</zscript>               
+<zscript src="codigo.zs" />
+</tabpanel>
+</tabpanels>
+</tabbox>               
 </window>
+</div>
